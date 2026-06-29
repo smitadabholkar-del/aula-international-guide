@@ -1875,8 +1875,33 @@ function setupEventListeners() {
   document.querySelectorAll('.nav-item').forEach(btn => {
     btn.addEventListener('click', () => {
       switchView(btn.dataset.view);
+      
+      // Close mobile sidebar on click
+      const sidebar = document.querySelector('.sidebar');
+      const backdrop = document.getElementById('mobile-sidebar-backdrop');
+      if (sidebar && backdrop) {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+      }
     });
   });
+
+  // Mobile Menu Toggle
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('mobile-sidebar-backdrop');
+
+  if (mobileToggle && sidebar && backdrop) {
+    mobileToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      backdrop.classList.toggle('active');
+    });
+
+    backdrop.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+    });
+  }
 
   // Study Area Filters
   document.getElementById('study-unit-filter').addEventListener('change', buildStudyDeck);
