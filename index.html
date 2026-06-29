@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula Plus - Spanish Study Assistant</title>
+  <link rel="stylesheet" href="styles.css?v=1.0.1">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo-container">
+        <div class="logo-icon">A+</div>
+        <div class="logo-text">
+          <h1>Aula Plus A2</h1>
+          <span>Study Assistant</span>
+        </div>
+      </div>
+      
+      <nav style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1;">
+        <button class="nav-item active" data-view="dashboard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Home
+        </button>
+        <button class="nav-item" data-view="study">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          Flashcards
+        </button>
+        <button class="nav-item" data-view="listening">
+          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+          Listening Practice
+        </button>
+        <button class="nav-item" data-view="drill">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+          Conjugation Drills
+        </button>
+        <button class="nav-item" data-view="library">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          Vocabulary Library
+        </button>
+        <button class="nav-item" data-view="frenzy">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Match Madness
+        </button>
+        <button class="nav-item" data-view="compare">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L20.2 3.8M21 16v5h-5M4 4l16.2 16.2"/></svg>
+          Grammar Compare
+        </button>
+        <button class="nav-item" data-view="creator">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add Custom Cards
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <div class="avatar">ES</div>
+          <div class="user-info">
+            <h3>Student</h3>
+            <p>Aula internacional 2 plus</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-viewport">
+      
+      <!-- 1. DASHBOARD VIEW -->
+      <section id="dashboard-view" class="view-panel active">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Welcome back!</h2>
+            <p>Keep practicing to prepare for your 15-minute teacher conversation sessions.</p>
+          </div>
+        </div>
+        
+        <!-- Stats Widgets -->
+        <div class="stats-grid">
+          <div class="glass-card stat-card">
+            <div class="stat-icon vocab">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h4 id="stat-vocab-count">0</h4>
+              <p>Vocabulary Words</p>
+            </div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-icon verbs">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <div class="stat-info">
+              <h4 id="stat-verbs-count">0</h4>
+              <p>Verbs Added</p>
+            </div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-icon prompts">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h4 id="stat-prompts-count">0</h4>
+              <p>Speaking Prompts</p>
+            </div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-icon listening">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h4 id="stat-listening-count">0</h4>
+              <p>Listening Passages</p>
+            </div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-icon sessions">
+              <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h4 id="stat-streak">0 days</h4>
+              <p>Study Streak</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-layout">
+          <!-- Left Column - Book Chapters -->
+          <div class="quick-study-section">
+            <h3 class="section-title">Topics from Aula 2 Plus</h3>
+            <div class="units-grid">
+              
+              <div class="unit-card" onclick="document.getElementById('study-unit-filter').value = '1'; buildStudyDeck(); switchView('study');">
+                <span class="unit-badge">Unit 1</span>
+                <h3>El español y tú</h3>
+                <p>Discussing study habits, giving recommendations, and expressing language-learning difficulties.</p>
+                <div class="unit-progress-bar">
+                  <div class="unit-progress-fill" id="unit-1-fill"></div>
+                </div>
+                <span id="unit-1-progress-text" style="font-size: 0.75rem; color: var(--clr-text-light);">0/0 completed</span>
+              </div>
+              
+              <div class="unit-card" onclick="document.getElementById('study-unit-filter').value = '2'; buildStudyDeck(); switchView('study');">
+                <span class="unit-badge">Unit 2</span>
+                <h3>Una vida de película</h3>
+                <p>Narrating past events, temporal markers, and writing biographies. Pretérito Indefinido.</p>
+                <div class="unit-progress-bar">
+                  <div class="unit-progress-fill" id="unit-2-fill"></div>
+                </div>
+                <span id="unit-2-progress-text" style="font-size: 0.75rem; color: var(--clr-text-light);">0/0 completed</span>
+              </div>
+
+              <div class="unit-card" onclick="document.getElementById('study-unit-filter').value = '3'; buildStudyDeck(); switchView('study');">
+                <span class="unit-badge">Unit 3</span>
+                <h3>Yo soy así</h3>
+                <p>Describing physical traits and personality character. Making comparisons and talking about relationships.</p>
+                <div class="unit-progress-bar">
+                  <div class="unit-progress-fill" id="unit-3-fill"></div>
+                </div>
+                <span id="unit-3-progress-text" style="font-size: 0.75rem; color: var(--clr-text-light);">0/0 completed</span>
+              </div>
+
+              <div class="unit-card" onclick="document.getElementById('study-unit-filter').value = '4'; buildStudyDeck(); switchView('study');">
+                <span class="unit-badge">Unit 4</span>
+                <h3>Hogar, dulce hogar</h3>
+                <p>Describing houses, locating objects in rooms, expressing preferences, and comparing lodging.</p>
+                <div class="unit-progress-bar">
+                  <div class="unit-progress-fill" id="unit-4-fill"></div>
+                </div>
+                <span id="unit-4-progress-text" style="font-size: 0.75rem; color: var(--clr-text-light);">0/0 completed</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Column - Streak Details & Actions -->
+          <div class="glass-card study-streak-card" style="justify-content: center;">
+            <div class="flame-icon">🔥</div>
+            <h3>Study Consistency</h3>
+            <p>Great job! Spend just 10 minutes a day reviewing conjugations and vocabulary to stay sharp for your one-on-one conversational practice with your teacher.</p>
+            <div class="streak-number" id="dashboard-streak-val">1 day</div>
+            <button class="btn btn-primary" onclick="document.getElementById('study-unit-filter').value = 'all'; document.getElementById('study-type-filter').value = 'all'; document.getElementById('study-mode-filter').value = 'solo'; buildStudyDeck(); switchView('study');" style="width: 100%;">
+              Start General Session
+            </button>
+            <button class="btn btn-outline" onclick="document.getElementById('study-unit-filter').value = 'all'; document.getElementById('study-type-filter').value = 'all'; document.getElementById('study-mode-filter').value = 'partner'; buildStudyDeck(); switchView('study');" style="width: 100%; margin-top: 12px; border-color: var(--clr-primary); color: var(--clr-primary);">
+              👥 Start Partner Quiz
+            </button>
+            <button class="btn btn-outline" id="btn-reset-progress" style="width: 100%; margin-top: 12px; border-color: var(--clr-danger); color: var(--clr-danger); display: flex; align-items: center; justify-content: center; gap: 8px;">
+              ⚠️ Reset Study Progress
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. FLASHCARDS STUDY VIEW -->
+      <section id="study-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Study Arena</h2>
+            <p>Review vocabulary, verb conjugation helpers, and conversational prompts.</p>
+          </div>
+        </div>
+
+        <div class="study-controls">
+          <div class="study-filters">
+            <select id="study-unit-filter" class="select-filter">
+              <option value="all">All Units</option>
+              <option value="1">Unit 1: El español y tú</option>
+              <option value="2">Unit 2: Una vida de película</option>
+              <option value="3">Unit 3: Yo soy así</option>
+              <option value="4">Unit 4: Hogar, dulce hogar</option>
+              <option value="5">Unit 5</option>
+              <option value="6">Unit 6</option>
+              <option value="7">Unit 7</option>
+              <option value="8">Unit 8</option>
+              <option value="9">Unit 9</option>
+              <option value="10">Unit 10</option>
+            </select>
+            <select id="study-type-filter" class="select-filter">
+              <option value="all">All Types</option>
+              <option value="vocab">Vocabulary</option>
+              <option value="verbs">Verbs</option>
+              <option value="prompts">Speaking Prompts</option>
+            </select>
+            <select id="study-mode-filter" class="select-filter" style="border-left: 3px solid var(--clr-primary);">
+              <option value="solo">👤 Solo Study</option>
+              <option value="partner">👥 Partner Quiz</option>
+            </select>
+            
+            <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px; background: rgba(0,0,0,0.02); padding: 4px 12px; border-radius: var(--radius-md); border: 1px solid var(--clr-border);">
+              <span style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-light);">Voice:</span>
+              <select id="study-voice-select" class="select-filter" style="padding: 6px 12px; box-shadow: none; border: none; background: transparent; font-size: 0.85rem; max-width: 150px;"></select>
+              
+              <span style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-light); margin-left: 8px;">Speed:</span>
+              <input type="range" id="study-speed-range" min="0.6" max="1.3" step="0.05" value="1.0" style="width: 70px; accent-color: var(--clr-primary); cursor: pointer;">
+              <span id="study-speed-val" style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-dark); min-width: 32px;">1.0x</span>
+            </div>
+          </div>
+          <span class="deck-progress-text" id="deck-progress-text">1 of 10</span>
+        </div>
+        
+        <!-- Partner Quiz Banner -->
+        <div id="partner-quiz-banner" class="partner-quiz-banner" style="display: none;">
+          <div class="partner-banner-content">
+            <span class="partner-banner-icon">👥</span>
+            <div class="partner-banner-text">
+              <strong>Partner Quiz Mode</strong>
+              <span>Quizzer: Read the card front out loud to your partner, reveal the back, and grade them.</span>
+            </div>
+          </div>
+          <div class="partner-score-badge" id="partner-score-badge">Score: 0 / 0</div>
+        </div>
+
+        <div class="card-arena">
+          
+          <div id="study-card-wrapper" style="display: flex; align-items: center; gap: 24px; width: 100%; justify-content: center;">
+            <!-- Prev Button -->
+            <button class="btn btn-outline" id="btn-prev-card" style="padding: 14px; border-radius: 50%;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
+            <!-- Flipping Flashcard -->
+            <div class="flashcard-container" id="study-flashcard">
+              <div class="flashcard">
+                
+                <!-- Front Side -->
+                <div class="card-face card-front">
+                  <div class="card-top">
+                    <span class="card-tag" id="card-front-tag">Vocabulary</span>
+                    <button class="card-audio-btn" id="btn-speak-front" title="Listen pronunciation">
+                      <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-word" id="card-front-word">Me cuesta</div>
+                    <div class="card-hint" id="card-front-hint">Irregular Verb (costar)</div>
+                  </div>
+                  <div class="card-footer-info">
+                    <span>💡 Click card to flip and view details</span>
+                    <span>Spacebar: Flip</span>
+                  </div>
+                </div>
+
+                <!-- Back Side -->
+                <div class="card-face card-back">
+                  <div class="card-top">
+                    <span class="card-tag" id="card-back-tag">Translation</span>
+                    <button class="card-audio-btn" id="btn-speak-back" title="Listen pronunciation">
+                      <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-word" id="card-back-word">It is hard for me / It costs me</div>
+                    <div class="card-hint" id="card-back-hint">Presente (yo form)</div>
+                    <div class="card-example" id="card-back-example">A mí me cuesta mucho hablar con soltura.</div>
+                  </div>
+                  <div class="card-footer-info">
+                    <span>Rate your recollection below</span>
+                    <span>Shortcuts: [1] Hard, [2] Medium, [3] Easy</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="btn btn-outline" id="btn-next-card" style="padding: 14px; border-radius: 50%;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Partner Quiz Summary Screen (hidden by default) -->
+          <div id="partner-quiz-summary" class="glass-card partner-summary-card" style="display: none; width: 100%; max-width: 680px; min-height: 440px; padding: 40px; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 20px;">
+            <span style="font-size: 3.5rem; margin-bottom: 8px;">🏆</span>
+            <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--clr-primary); margin: 0;">Quiz Completed!</h3>
+            <p style="font-size: 1.1rem; color: var(--clr-text-dark); max-width: 80%; margin: 0;" id="partner-quiz-result-text">Player 2 scored 8 out of 10 cards correctly!</p>
+            <div class="result-percentage" id="partner-quiz-percentage" style="font-size: 3rem; font-weight: 800; color: var(--clr-success); margin: 10px 0;">80%</div>
+            <div style="display: flex; gap: 16px; width: 100%; max-width: 420px; margin-top: 10px;">
+              <button class="btn btn-primary" id="btn-quiz-swap" style="flex: 1;">👥 Swap Roles & Retry</button>
+              <button class="btn btn-outline" id="btn-quiz-restart" style="flex: 1;">🔁 Restart Same Role</button>
+            </div>
+          </div>
+
+          <!-- Difficulty Rating controls (hidden until card is flipped) -->
+          <div class="rating-controls" id="rating-controls">
+            <button class="btn btn-hard" id="btn-rate-hard">Need Review (1)</button>
+            <button class="btn btn-medium" id="btn-rate-medium">Medium (2)</button>
+            <button class="btn btn-easy" id="btn-rate-easy">Mastered (3)</button>
+          </div>
+
+          <!-- Partner Quiz grading controls (hidden until card is flipped) -->
+          <div class="rating-controls partner-controls" id="partner-quiz-controls" style="display: none;">
+            <button class="btn btn-hard" id="btn-quiz-incorrect" style="background-color: var(--clr-danger); color: white; border: none; box-shadow: var(--shadow-sm); flex-grow: 1;">❌ Incorrect (1)</button>
+            <button class="btn btn-easy" id="btn-quiz-correct" style="background-color: var(--clr-success); color: white; border: none; box-shadow: var(--shadow-sm); flex-grow: 1;">✅ Correct (3)</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 2.5. LISTENING COMPREHENSION VIEW -->
+      <section id="listening-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Listening Practice</h2>
+            <p>Review Spanish listening comprehension passages from Units 1-4. Play audio and answer the questions.</p>
+          </div>
+        </div>
+
+        <div class="study-controls">
+          <div class="study-filters">
+            <select id="listening-unit-filter" class="select-filter">
+              <option value="all">All Units</option>
+              <option value="1">Unit 1: El español y tú</option>
+              <option value="2">Unit 2: Una vida de película</option>
+              <option value="3">Unit 3: Yo soy así</option>
+              <option value="4">Unit 4: Hogar, dulce hogar</option>
+              <option value="5">Unit 5</option>
+              <option value="6">Unit 6</option>
+              <option value="7">Unit 7</option>
+              <option value="8">Unit 8</option>
+              <option value="9">Unit 9</option>
+              <option value="10">Unit 10</option>
+            </select>
+            
+            <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px; background: rgba(0,0,0,0.02); padding: 4px 12px; border-radius: var(--radius-md); border: 1px solid var(--clr-border);">
+              <span style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-light);">Voice:</span>
+              <select id="listening-voice-select" class="select-filter" style="padding: 6px 12px; box-shadow: none; border: none; background: transparent; font-size: 0.85rem; max-width: 150px;"></select>
+              
+              <span style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-light); margin-left: 8px;">Speed:</span>
+              <input type="range" id="listening-speed-range" min="0.6" max="1.3" step="0.05" value="1.0" style="width: 70px; accent-color: var(--clr-primary); cursor: pointer;">
+              <span id="listening-speed-val" style="font-size: 0.8rem; font-weight:600; color:var(--clr-text-dark); min-width: 32px;">1.0x</span>
+            </div>
+          </div>
+          <span class="deck-progress-text" id="listening-deck-progress-text">1 of 8</span>
+        </div>
+
+        <div class="card-arena">
+          
+          <div id="listening-card-wrapper" style="display: flex; align-items: center; gap: 24px; width: 100%; justify-content: center;">
+            <!-- Prev Button -->
+            <button class="btn btn-outline" id="btn-prev-listening" style="padding: 14px; border-radius: 50%;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
+            <!-- Flipping Flashcard -->
+            <div class="flashcard-container" id="listening-flashcard">
+              <div class="flashcard">
+                
+                <!-- Front Side -->
+                <div class="card-face card-front">
+                  <div class="card-top">
+                    <span class="card-tag" id="listening-card-front-tag">Listening</span>
+                  </div>
+                  <div class="card-body">
+                    <div style="margin: auto 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; width: 100%;">
+                      <!-- Sleek Audio Player front -->
+                      <div class="audio-player-container front-player" id="listening-player-front">
+                        <div class="player-controls">
+                          <button class="player-btn play-pause-btn" id="btn-listening-play-pause-front" title="Play/Pause">
+                            <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <svg class="pause-icon" style="display:none;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                          </button>
+                          
+                          <button class="player-btn restart-btn" id="btn-listening-restart-front" title="Restart">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                          </button>
+
+                          <div class="player-progress-wrapper">
+                            <input type="range" class="player-slider" id="slider-listening-front" min="0" max="100" value="0">
+                            <div class="player-time-display">
+                              <span class="player-time-current" id="time-current-front">0:00</span>
+                              <span class="player-time-duration" id="time-duration-front">0:00</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="width: 100%; border-top: 1px solid var(--clr-border); margin: 12px 0;"></div>
+                      <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--clr-primary);">Pregunta de comprensión:</div>
+                      <p id="listening-front-question" style="margin: 0; font-size: 1.35rem; font-weight: 600; color: var(--clr-text-dark); line-height: 1.45; text-align: center;"></p>
+                      <p id="listening-front-question-translation" style="margin: 2px 0 0 0; font-size: 0.95rem; font-style: italic; color: var(--clr-text-light); text-align: center;"></p>
+                    </div>
+                  </div>
+                  <div class="card-footer-info">
+                    <span>💡 Click card to flip and view details</span>
+                    <span>Spacebar: Flip</span>
+                  </div>
+                </div>
+
+                <!-- Back Side -->
+                <div class="card-face card-back">
+                  <div class="card-top">
+                    <span class="card-tag" id="listening-card-back-tag">Transcript</span>
+                  </div>
+                  <div class="card-body">
+                    <div style="margin: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; text-align: center;">
+                      <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: #2ecc71;">Respuesta correcta:</div>
+                      <p id="listening-back-answer" style="margin: 0; font-size: 1.45rem; font-weight: 700; color: #ffffff; line-height: 1.4; text-align: center;"></p>
+                      <p id="listening-back-answer-translation" style="margin: 2px 0 6px 0; font-size: 0.95rem; font-style: italic; color: #bdc3c7; text-align: center;"></p>
+                      
+                      <div style="text-align: left; padding: 16px; background: rgba(255, 255, 255, 0.05); border-left: 3px solid var(--clr-primary); border-radius: var(--radius-sm); margin-top: 8px; width: 100%;">
+                        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--clr-primary); display: block; margin-bottom: 6px;">Transcripción en español:</span>
+                        <p id="listening-back-passage" style="margin: 0 0 10px 0; font-size: 0.95rem; font-weight: 500; color: #ffffff; line-height: 1.5;"></p>
+                        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: #bdc3c7; display: block; margin-bottom: 6px;">Traducción al inglés:</span>
+                        <p id="listening-back-passage-translation" style="margin: 0; font-size: 0.85rem; font-style: italic; color: #ecf0f1; line-height: 1.45;"></p>
+                        <!-- Sleek Audio Player back -->
+                        <div class="audio-player-container back-player" id="listening-player-back" style="margin-top: 16px;">
+                          <div class="player-controls">
+                            <button class="player-btn play-pause-btn" id="btn-listening-play-pause-back" title="Play/Pause">
+                              <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                              <svg class="pause-icon" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                            </button>
+                            
+                            <button class="player-btn restart-btn" id="btn-listening-restart-back" title="Restart">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                            </button>
+
+                            <div class="player-progress-wrapper">
+                              <input type="range" class="player-slider" id="slider-listening-back" min="0" max="100" value="0">
+                              <div class="player-time-display">
+                                <span class="player-time-current" id="time-current-back">0:00</span>
+                                <span class="player-time-duration" id="time-duration-back">0:00</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer-info">
+                    <span>Rate your recollection below</span>
+                    <span>Shortcuts: [1] Hard, [2] Medium, [3] Easy</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="btn btn-outline" id="btn-next-listening" style="padding: 14px; border-radius: 50%;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Difficulty Rating controls (hidden until card is flipped) -->
+          <div class="rating-controls" id="listening-rating-controls">
+            <button class="btn btn-hard" id="btn-listening-rate-hard">Need Review (1)</button>
+            <button class="btn btn-medium" id="btn-listening-rate-medium">Medium (2)</button>
+            <button class="btn btn-easy" id="btn-listening-rate-easy">Mastered (3)</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. CONJUGATION DRILL VIEW -->
+      <section id="drill-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Verb Conjugation Drills</h2>
+            <p>Type in the correct conjugations to master verb patterns.</p>
+          </div>
+          
+          <select id="drill-unit-filter" class="select-filter">
+            <option value="all">All Units</option>
+            <option value="1">Unit 1 (Present Tense - Stem-changing)</option>
+            <option value="2">Unit 2 (Pretérito Indefinido - Past)</option>
+            <option value="3">Unit 3 (Present Tense - irregular "yo")</option>
+            <option value="4">Unit 4 (Present Tense - preferences)</option>
+            <option value="5">Unit 5</option>
+            <option value="6">Unit 6</option>
+            <option value="7">Unit 7</option>
+            <option value="8">Unit 8</option>
+            <option value="9">Unit 9</option>
+            <option value="10">Unit 10</option>
+          </select>
+        </div>
+
+        <div class="drill-layout">
+          <!-- Drill Work Area -->
+          <div class="glass-card">
+            <div class="drill-card-header">
+              <div>
+                <h3 class="drill-verb-title" id="drill-verb-name">Hacer</h3>
+                <p class="drill-verb-meaning" id="drill-verb-translation">to do / to make</p>
+              </div>
+              <div class="drill-meta-tags">
+                <span class="meta-tag tense" id="drill-tag-tense">Pretérito Indefinido</span>
+                <span class="meta-tag" id="drill-tag-type">Irregular</span>
+                <span class="meta-tag" id="drill-tag-unit">Unit 2</span>
+              </div>
+            </div>
+
+            <!-- Inputs for Yo, Tú, Él... -->
+            <form id="drill-form" onsubmit="event.preventDefault();" style="display: block;">
+              <div class="conjugation-form-grid" id="drill-conjugation-fields">
+                <!-- Dynamically filled by app.js -->
+              </div>
+              
+              <div class="drill-actions">
+                <div class="drill-feedback" id="drill-feedback-msg"></div>
+                <button type="button" class="btn btn-primary" id="btn-check-drill">
+                  Verify Conjugations
+                </button>
+                <button type="button" class="btn btn-easy" id="btn-next-drill" style="display: none;">
+                  Next Verb ➔
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Drill Grammar Help -->
+          <div class="glass-card reference-card">
+            <h3>Grammar Tips</h3>
+            <div id="drill-grammar-help">
+              <p style="font-size: 0.95rem; line-height: 1.6; color: var(--clr-text-light); margin-bottom: 12px;">
+                Watch out for accents! In the **Pretérito Indefinido** (simple past), the first person singular (yo) and third person singular (él/ella/usted) of regular verbs carry written accents:
+              </p>
+              <ul class="reference-list">
+                <li><span>Nacer (yo)</span> <span>nací</span></li>
+                <li><span>Nacer (él/ella)</span> <span>nació</span></li>
+                <li><span>Superar (yo)</span> <span>superé</span></li>
+                <li><span>Superar (él/ella)</span> <span>superó</span></li>
+              </ul>
+              <p style="font-size: 0.85rem; color: var(--clr-primary); font-weight:500; margin-top: 16px;">
+                Note: Irregular stem verbs in the past tense (like *hacer* ➔ *hic-*, *tener* ➔ *tuv-*, *estar* ➔ *estuv-*) do NOT carry accents on their *yo* (-e) and *él* (-o) endings (e.g., hice, hizo, tuve, tuvo, estuve, estuvo).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. REFERENCE LIBRARY VIEW -->
+      <section id="library-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Reference Library</h2>
+            <p>Search, listen to, and delete vocabulary entries or verb conjugations.</p>
+          </div>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="library-filters">
+          <div class="search-input-wrapper">
+            <input type="text" id="lib-search" class="search-input" placeholder="Search word, verb or translation...">
+            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <select id="lib-unit-filter" class="select-filter">
+            <option value="all">All Units</option>
+            <option value="1">Unit 1: El español y tú</option>
+            <option value="2">Unit 2: Una vida de película</option>
+            <option value="3">Unit 3: Yo soy así</option>
+            <option value="4">Unit 4: Hogar, dulce hogar</option>
+            <option value="5">Unit 5</option>
+            <option value="6">Unit 6</option>
+            <option value="7">Unit 7</option>
+            <option value="8">Unit 8</option>
+            <option value="9">Unit 9</option>
+            <option value="10">Unit 10</option>
+          </select>
+          <select id="lib-type-filter" class="select-filter">
+             <option value="all">All Types</option>
+             <option value="vocab">Vocabulary</option>
+             <option value="verb">Verbs</option>
+             <option value="prompt">Speaking Prompts</option>
+             <option value="listening">Listening Comprehension</option>
+           </select>
+        </div>
+
+        <!-- Table View -->
+        <div class="library-table-container">
+          <table class="library-table">
+            <thead>
+              <tr>
+                <th>Spanish Phrase / Verb</th>
+                <th>English Meaning</th>
+                <th>Chapter</th>
+                <th>Category</th>
+                <th>Quick Conjugations / Context</th>
+                <th style="width: 100px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="library-tbody">
+              <!-- Filled dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. CARD CREATOR / SETTINGS VIEW -->
+      <section id="creator-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Add Custom Flashcards</h2>
+            <p>Save new terms and verbs that arise in your 15-minute speaking practice with your teacher.</p>
+          </div>
+        </div>
+
+        <div class="creator-layout">
+          <!-- Form Section -->
+          <div class="glass-card">
+            
+            <div class="creator-selector" style="margin-bottom: 24px;">
+               <button class="creator-tab active" data-type="vocab">Vocabulary Word or Phrase</button>
+               <button class="creator-tab" data-type="verb">Verb with Conjugations</button>
+               <button class="creator-tab" data-type="listening">Listening Passage</button>
+             </div>
+
+            <!-- Form fields -->
+            <div class="creator-form">
+              
+              <!-- Vocab Form -->
+              <div id="creator-vocab-fields" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="form-control-block">
+                  <label for="c-word">Spanish Phrase *</label>
+                  <input type="text" id="c-word" class="input-text" placeholder="e.g., llevarse bien con alguien">
+                </div>
+                
+                <div class="form-control-block">
+                  <label for="c-translation">English Translation *</label>
+                  <input type="text" id="c-translation" class="input-text" placeholder="e.g., to get along well with someone">
+                </div>
+
+                <div class="form-row">
+                  <div class="form-control-block">
+                    <label for="c-category">Category / Tag</label>
+                    <input type="text" id="c-category" class="input-text" placeholder="e.g., Relationships, Emotions">
+                  </div>
+                  <div class="form-control-block">
+                    <label for="c-unit">Book Unit</label>
+                    <select id="c-unit" class="select-filter" style="width: 100%; box-shadow: none;">
+                      <option value="1">Unit 1</option>
+                      <option value="2">Unit 2</option>
+                      <option value="3">Unit 3</option>
+                      <option value="4">Unit 4</option>
+                      <option value="5">Unit 5</option>
+                      <option value="6">Unit 6</option>
+                      <option value="7">Unit 7</option>
+                      <option value="8">Unit 8</option>
+                      <option value="9">Unit 9</option>
+                      <option value="10">Unit 10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-control-block">
+                  <label for="c-example">Example Sentence (Highly Recommended)</label>
+                  <textarea id="c-example" class="input-textarea" placeholder="e.g., Me llevo muy bien con mi profesora de español."></textarea>
+                </div>
+              </div>
+
+              <!-- Verb Form -->
+              <div id="creator-verb-fields" style="display: none; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-control-block" style="grid-column: span 2;">
+                  <label for="cv-name">Spanish Infinitive Verb *</label>
+                  <input type="text" id="cv-name" class="input-text" placeholder="e.g., soler">
+                </div>
+                
+                <div class="form-control-block" style="grid-column: span 2;">
+                  <label for="cv-meaning">English Meaning *</label>
+                  <input type="text" id="cv-meaning" class="input-text" placeholder="e.g., to usually do / be accustomed to">
+                </div>
+
+                <div class="form-control-block">
+                  <label for="cv-tense">Verb Tense</label>
+                  <input type="text" id="cv-tense" class="input-text" placeholder="e.g., Presente, Indefinido">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-type">Irregularity Details</label>
+                  <input type="text" id="cv-type" class="input-text" placeholder="e.g., stem-changing (o-ue)">
+                </div>
+
+                <div class="form-control-block">
+                  <label for="cv-unit">Book Unit</label>
+                  <select id="cv-unit" class="select-filter" style="width: 100%; box-shadow: none;">
+                    <option value="1">Unit 1</option>
+                    <option value="2">Unit 2</option>
+                    <option value="3">Unit 3</option>
+                    <option value="4">Unit 4</option>
+                    <option value="5">Unit 5</option>
+                    <option value="6">Unit 6</option>
+                    <option value="7">Unit 7</option>
+                    <option value="8">Unit 8</option>
+                    <option value="9">Unit 9</option>
+                    <option value="10">Unit 10</option>
+                  </select>
+                </div>
+                <div style="grid-column: span 2; border-bottom: 1px solid var(--clr-border); margin: 8px 0;"></div>
+
+                <h3 style="grid-column: span 2; font-size: 0.95rem; font-weight:600; color:var(--clr-text-dark);">Conjugations *</h3>
+                
+                <div class="form-control-block">
+                  <label for="cv-yo">yo *</label>
+                  <input type="text" id="cv-yo" class="input-text" placeholder="yo ...">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-tu">tú *</label>
+                  <input type="text" id="cv-tu" class="input-text" placeholder="tú ...">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-el">él / ella / usted *</label>
+                  <input type="text" id="cv-el" class="input-text" placeholder="él ...">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-nosotros">nosotros / nosotras *</label>
+                  <input type="text" id="cv-nosotros" class="input-text" placeholder="nosotros ...">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-vosotros">vosotros / vosotras (optional)</label>
+                  <input type="text" id="cv-vosotros" class="input-text" placeholder="vosotros ...">
+                </div>
+                <div class="form-control-block">
+                  <label for="cv-ellos">ellos / ellas / ustedes *</label>
+                  <input type="text" id="cv-ellos" class="input-text" placeholder="ellos ...">
+                </div>
+              </div>
+
+              <!-- Listening Form -->
+              <div id="creator-listening-fields" style="display: none; flex-direction: column; gap: 16px;">
+                <div class="form-control-block">
+                  <label for="cl-passage">Spanish Audio Passage *</label>
+                  <textarea id="cl-passage" class="input-textarea" placeholder="e.g., Perdone, señora, ¿le importaría hablar un poco más despacio?"></textarea>
+                </div>
+                
+                <div class="form-control-block">
+                  <label for="cl-passage-translation">English Passage Translation *</label>
+                  <textarea id="cl-passage-translation" class="input-textarea" placeholder="e.g., Excuse me, ma'am, would you mind speaking a bit slower?"></textarea>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-control-block">
+                    <label for="cl-question">Comprehension Question (Spanish) *</label>
+                    <input type="text" id="cl-question" class="input-text" placeholder="e.g., ¿Qué le pide el estudiante a la señora?">
+                  </div>
+                  <div class="form-control-block">
+                    <label for="cl-question-translation">Question Translation (English)</label>
+                    <input type="text" id="cl-question-translation" class="input-text" placeholder="e.g., What does the student ask the woman to do?">
+                  </div>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-control-block">
+                    <label for="cl-answer">Correct Answer (Spanish) *</label>
+                    <input type="text" id="cl-answer" class="input-text" placeholder="e.g., Le pide que hable más despacio.">
+                  </div>
+                  <div class="form-control-block">
+                    <label for="cl-answer-translation">Answer Translation (English) *</label>
+                    <input type="text" id="cl-answer-translation" class="input-text" placeholder="e.g., He asks her to speak slower.">
+                  </div>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-control-block">
+                    <label for="cl-context">Category / Context</label>
+                    <input type="text" id="cl-context" class="input-text" placeholder="e.g., Courtesy Requests">
+                  </div>
+                  <div class="form-control-block">
+                    <label for="cl-unit">Book Unit</label>
+                    <select id="cl-unit" class="select-filter" style="width: 100%; box-shadow: none;">
+                      <option value="1">Unit 1</option>
+                      <option value="2">Unit 2</option>
+                      <option value="3">Unit 3</option>
+                      <option value="4">Unit 4</option>
+                      <option value="5">Unit 5</option>
+                      <option value="6">Unit 6</option>
+                      <option value="7">Unit 7</option>
+                      <option value="8">Unit 8</option>
+                      <option value="9">Unit 9</option>
+                      <option value="10">Unit 10</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save Actions -->
+              <div style="display: flex; gap: 16px; margin-top: 12px;">
+                <button type="button" class="btn btn-primary" id="btn-save-card" style="flex-grow: 1;">
+                  Save Flashcard
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Live Preview & Backup Tools -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="glass-card">
+              <h3 class="section-title">Live Preview</h3>
+              <div id="preview-card-slot" class="preview-card-container">
+                <!-- Preview updates dynamically -->
+                <div class="preview-placeholder">
+                  Type your card details on the left to see how it will render in the study arena.
+                </div>
+              </div>
+            </div>
+
+            <!-- Backup operations -->
+            <div class="glass-card">
+              <h3 class="section-title">Backup & Restore</h3>
+              <p style="font-size: 0.85rem; color: var(--clr-text-light); line-height: 1.5; margin-bottom: 16px;">
+                Export your custom vocabulary and history into a backup JSON file, or load it in a different browser window.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn btn-outline" id="btn-export-data" style="width: 100%;">
+                  Export Library (JSON)
+                </button>
+                <div class="file-input-wrapper" style="width: 100%;">
+                  <button class="btn btn-outline" style="width: 100%;">Import Library (JSON)</button>
+                  <input type="file" id="btn-import-file" accept=".json">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 6. MATCH MADNESS / FLASHCARD FRENZY VIEW -->
+      <section id="frenzy-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Match Madness</h2>
+            <p>Match Spanish words to their translations as fast as you can. Beat the clock!</p>
+          </div>
+        </div>
+
+        <div id="frenzy-setup" class="glass-card" style="text-align: center; max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; padding: 48px;">
+          <div style="font-size: 4rem;">⚡</div>
+          <h3>Are you ready for the Frenzy?</h3>
+          <p style="color: var(--clr-text-light); line-height: 1.6;">
+            You will have **45 seconds** to match Spanish terms with their English translations. Correct matches will fade out and give you points. Let's see how many matches you can secure!
+          </p>
+          
+          <div style="display: flex; gap: 16px; justify-content: center; align-items: center;">
+            <select id="frenzy-unit-filter" class="select-filter" style="width: 200px;">
+              <option value="all">All Units</option>
+              <option value="1">Unit 1: El español y tú</option>
+              <option value="2">Unit 2: Una vida de película</option>
+              <option value="3">Unit 3: Yo soy así</option>
+              <option value="4">Unit 4: Hogar, dulce hogar</option>
+              <option value="5">Unit 5</option>
+              <option value="6">Unit 6</option>
+              <option value="7">Unit 7</option>
+              <option value="8">Unit 8</option>
+              <option value="9">Unit 9</option>
+              <option value="10">Unit 10</option>
+            </select>
+            <button class="btn btn-primary" id="btn-start-frenzy">Start Game</button>
+          </div>
+          
+          <div style="font-size: 0.95rem; font-weight:600; color:var(--clr-primary); margin-top: 12px;" id="frenzy-high-score-display">
+            High Score: 0 matches
+          </div>
+        </div>
+
+        <div id="frenzy-arena" style="display: none; flex-direction: column; gap: 24px; max-width: 800px; margin: 0 auto; width: 100%;">
+          <!-- Timer and Score bar -->
+          <div class="glass-card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 28px;">
+            <div style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+              <span>Score:</span>
+              <span id="frenzy-current-score" style="color: var(--clr-primary); font-size: 1.3rem;">0</span>
+            </div>
+            
+            <!-- Timer Bar -->
+            <div style="flex-grow: 1; margin: 0 40px; height: 12px; background: rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden; position: relative;">
+              <div id="frenzy-timer-bar" style="height: 100%; width: 100%; background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light)); border-radius: 6px; transition: width 0.1s linear;"></div>
+            </div>
+            
+            <div style="font-weight: 700; font-size: 1.1rem; min-width: 60px; text-align: right;">
+              Time: <span id="frenzy-time-left" style="color: var(--clr-primary);">45s</span>
+            </div>
+          </div>
+
+          <!-- Matching Columns -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" id="frenzy-match-columns">
+            <div style="display: flex; flex-direction: column; gap: 14px;" id="frenzy-spanish-col">
+              <!-- Filled dynamically by app.js -->
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px;" id="frenzy-english-col">
+              <!-- Filled dynamically by app.js -->
+            </div>
+          </div>
+          
+          <button class="btn btn-outline" id="btn-quit-frenzy" style="align-self: center; margin-top: 12px;">Quit Game</button>
+        </div>
+
+        <!-- Time's Up Screen -->
+        <div id="frenzy-results" class="glass-card" style="display: none; text-align: center; max-width: 500px; margin: 0 auto; flex-direction: column; gap: 24px; padding: 48px;">
+          <div style="font-size: 4rem;">🏆</div>
+          <h3 style="font-size: 1.8rem; font-weight:700;">Time's Up!</h3>
+          <p id="frenzy-results-summary" style="font-size: 1.1rem; line-height: 1.5; color: var(--clr-text-light);">
+            You successfully completed **12 matches** in 45 seconds!
+          </p>
+          <div id="frenzy-new-high-score" style="display: none; color: var(--clr-success); font-weight:700; font-size: 1.1rem;">
+            🎉 NEW HIGH SCORE! 🎉
+          </div>
+          <div style="display: flex; gap: 16px; justify-content: center; margin-top: 12px;">
+            <button class="btn btn-outline" id="btn-frenzy-go-home">Exit to Home</button>
+            <button class="btn btn-primary" id="btn-frenzy-restart">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. GRAMMAR COMPARE VIEW -->
+      <section id="compare-view" class="view-panel">
+        <div class="view-header">
+          <div class="view-title">
+            <h2>Grammar Compare</h2>
+            <p>Study comparison patterns from pages 229 & 230 and practice by testing or building your own sentences.</p>
+          </div>
+        </div>
+
+        <div class="compare-layout">
+          <!-- Left Column: Study Guide Chart -->
+          <div class="glass-card compare-guide-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px;">
+            <h3 class="section-title" style="margin-bottom: 4px;">Grammar Reference (p. 229 - 230)</h3>
+            <p style="font-size: 0.82rem; color: var(--clr-text-light); line-height: 1.4; margin: 0 0 8px 0;">
+              Use this summary chart to contrast the structures of superiority, inferiority, equality, and irregular comparison.
+            </p>
+            
+            <div class="grammar-table-wrapper" style="border: 1px solid var(--clr-border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 8px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+              <!-- Section Header -->
+              <div style="background-color: #B03A2E; color: #fff; padding: 10px 14px; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                <span>📊</span> COMPARATIVES (p. 229)
+              </div>
+              <div style="padding: 10px 14px; background-color: #fafafa; border-bottom: 1px solid var(--clr-border); font-size: 0.82rem; color: var(--clr-text-light); line-height: 1.4;">
+                The following structures are used to make comparisons:
+              </div>
+
+              <!-- Table 1: Nouns & Verbs -->
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; line-height: 1.45; border-bottom: 2px solid var(--clr-border); text-align: left;">
+                <thead>
+                  <tr style="background-color: #DFC493; border-bottom: 1px solid var(--clr-border);">
+                    <th style="padding: 8px 10px; width: 16%; border-right: 1px solid #fff; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.72rem; text-align: center;">Degree</th>
+                    <th style="padding: 8px 10px; width: 42%; font-weight: 700; color: #222; text-transform: uppercase; border-right: 1px solid #fff; font-size: 0.72rem;">Compare Nouns</th>
+                    <th style="padding: 8px 10px; width: 42%; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.72rem;">Compare Verbs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- SUPERIOR -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Superior</td>
+                    <!-- Nouns -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">más + noun (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Mi casa tiene <strong>más</strong> habitaciones (<strong>que</strong> la de mi hermana).</li>
+                      </ul>
+                    </td>
+                    <!-- Verbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">verb + más (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Mi casa me gusta <strong>más</strong> (<strong>que</strong> la de mi hermana).</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <!-- EQUAL -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Equal</td>
+                    <!-- Nouns -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">tanto/a/os/as + noun (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc; display: flex; flex-direction: column; gap: 4px;">
+                        <li>En mi barrio hay <strong>tantos</strong> coches <strong>como</strong> en este.</li>
+                        <li>En mi barrio hay <strong>tanto</strong> tráfico <strong>como</strong> en este.</li>
+                        <li>En mi barrio hay <strong>tantas</strong> tiendas <strong>como</strong> en este.</li>
+                        <li>En mi barrio hay <strong>tanta</strong> gente <strong>como</strong> en este.</li>
+                      </ul>
+                    </td>
+                    <!-- Verbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">verb tanto (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>En verano estudio <strong>tanto como</strong> en invierno.</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <!-- INFERIOR -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Inferior</td>
+                    <!-- Nouns -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">menos + noun (+ que...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Vivimos en un barrio con <strong>menos</strong> coches (<strong>que</strong> este).</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">no... tanto/a/os/as + noun (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc; display: flex; flex-direction: column; gap: 4px;">
+                        <li>En nuestro barrio <strong>no</strong> hay <strong>tantos</strong> coches (<strong>como</strong> en este).</li>
+                        <li>En nuestro barrio <strong>no</strong> hay <strong>tanto</strong> tráfico (<strong>como</strong> en este).</li>
+                        <li>En nuestro barrio <strong>no</strong> hay <strong>tantas</strong> tiendas (<strong>como</strong> en este).</li>
+                        <li>En nuestro barrio <strong>no</strong> hay <strong>tanta</strong> gente (<strong>como</strong> en este).</li>
+                      </ul>
+                    </td>
+                    <!-- Verbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">verb + menos (+ que...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>En verano cocino <strong>menos</strong> (<strong>que</strong> en invierno).</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">no + verb tanto (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>En verano <strong>no</strong> cocino <strong>tanto</strong> (<strong>como</strong> en invierno).</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Table 2: Adjectives & Adverbs -->
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; line-height: 1.45; text-align: left;">
+                <thead>
+                  <tr style="background-color: #DFC493; border-bottom: 1px solid var(--clr-border);">
+                    <th style="padding: 8px 10px; width: 16%; border-right: 1px solid #fff; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.72rem; text-align: center;">Degree</th>
+                    <th style="padding: 8px 10px; width: 42%; font-weight: 700; color: #222; text-transform: uppercase; border-right: 1px solid #fff; font-size: 0.72rem;">Compare Adjectives</th>
+                    <th style="padding: 8px 10px; width: 42%; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.72rem;">Compare Adverbs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- SUPERIOR -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Superior</td>
+                    <!-- Adjectives -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">más + adjective (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc; display: flex; flex-direction: column; gap: 4px;">
+                        <li>Mi habitación es <strong>más</strong> luminosa (<strong>que</strong> la de mi hermana).</li>
+                        <li>Este piso es <strong>mejor</strong> (<strong>que</strong> el mío). <small style="color: #d35400; font-weight: bold;">(irreg.)</small></li>
+                      </ul>
+                    </td>
+                    <!-- Adverbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 4px; font-size: 0.76rem;">más + adverb (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc; display: flex; flex-direction: column; gap: 4px;">
+                        <li>Ahora leo en español <strong>más</strong> rápido (<strong>que</strong> antes).</li>
+                        <li>Cocino <strong>mejor</strong> (<strong>que</strong> mi padre). <small style="color: #d35400; font-weight: bold;">(irreg.)</small></li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <!-- EQUAL -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Equal</td>
+                    <!-- Adjectives -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">tan + adjective (+ como...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Mi casa es <strong>tan</strong> grande <strong>como</strong> la tuya.</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">igual de + adjective (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Mi casa es <strong>igual de</strong> grande (<strong>que</strong> la tuya).</li>
+                      </ul>
+                    </td>
+                    <!-- Adverbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">tan + adverb (+ como...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Tú lees en español <strong>tan</strong> rápido <strong>como</strong> yo.</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">igual de + adverb (+ que...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Tú lees en español <strong>igual de</strong> rápido (<strong>que</strong> yo).</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <!-- INFERIOR -->
+                  <tr style="border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 10px 8px; font-weight: 700; color: #555; text-transform: uppercase; text-align: center; background-color: #F5EEDB; border-right: 1px solid #e9e9e9; vertical-align: middle; font-size: 0.7rem; letter-spacing: 0.02em;">Inferior</td>
+                    <!-- Adjectives -->
+                    <td style="padding: 10px; background-color: #FDFBF7; border-right: 1px solid #e9e9e9; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">menos + adjective (+ que...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Vivimos en un barrio <strong>menos</strong> ruidoso (<strong>que</strong> este).</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">no... tan + adjective (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Nuestro barrio <strong>no</strong> es <strong>tan</strong> ruidoso (<strong>como</strong> este).</li>
+                      </ul>
+                    </td>
+                    <!-- Adverbs -->
+                    <td style="padding: 10px; background-color: #FDFBF7; vertical-align: top;">
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">menos + adverb (+ que...)</div>
+                      <ul style="margin: 0 0 6px 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Alice lee en español <strong>menos</strong> rápido (<strong>que</strong> yo).</li>
+                      </ul>
+                      <div style="font-weight: 700; color: #8B4513; font-family: monospace; margin-bottom: 2px; font-size: 0.76rem;">no... tan + adverb (+ como...)</div>
+                      <ul style="margin: 0; padding-left: 14px; list-style-type: disc;">
+                        <li>Alice <strong>no</strong> lee en español <strong>tan</strong> rápido (<strong>como</strong> yo).</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Special Comparative Forms Section (p. 230) -->
+            <div class="grammar-table-wrapper" style="border: 1px solid var(--clr-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; margin-bottom: 8px;">
+              <!-- Section Header -->
+              <div style="background-color: #7D6608; color: #fff; padding: 8px 12px; font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                <span>✨</span> SPECIAL COMPARATIVE FORMS (p. 230)
+              </div>
+              <div style="padding: 8px 12px; background-color: #fafafa; border-bottom: 1px solid var(--clr-border); font-size: 0.78rem; color: var(--clr-text-light); line-height: 1.45;">
+                Some adjectives and adverbs have irregular comparative forms that replace the regular "más/menos" structure:
+              </div>
+              
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; line-height: 1.45; text-align: left;">
+                <thead>
+                  <tr style="background-color: #DFC493; border-bottom: 1px solid var(--clr-border);">
+                    <th style="padding: 6px 10px; width: 30%; border-right: 1px solid #fff; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.7rem;">Adjective / Adverb</th>
+                    <th style="padding: 6px 10px; width: 30%; border-right: 1px solid #fff; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.7rem;">Comparative Form</th>
+                    <th style="padding: 6px 10px; width: 40%; font-weight: 700; color: #222; text-transform: uppercase; font-size: 0.7rem;">Examples & Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e9e9e9; background-color: #FDFBF7;">
+                    <td style="padding: 8px 10px; font-weight: bold; border-right: 1px solid #e9e9e9;">bueno / bien</td>
+                    <td style="padding: 8px 10px; font-weight: bold; color: #7D6608; border-right: 1px solid #e9e9e9; font-family: monospace;">mejor (mejores)</td>
+                    <td style="padding: 8px 10px; vertical-align: top;">
+                      • Yo cocino <strong>mejor</strong> que tú.<br>
+                      • Este libro es <strong>mejor</strong> que el otro.
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e9e9e9; background-color: #FDFBF7;">
+                    <td style="padding: 8px 10px; font-weight: bold; border-right: 1px solid #e9e9e9;">malo / mal</td>
+                    <td style="padding: 8px 10px; font-weight: bold; color: #7D6608; border-right: 1px solid #e9e9e9; font-family: monospace;">peor (peores)</td>
+                    <td style="padding: 8px 10px; vertical-align: top;">
+                      • Duermo <strong>peor</strong> en hoteles que en casa.<br>
+                      • Esta película es <strong>peor</strong> que la primera.
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e9e9e9; background-color: #FDFBF7;">
+                    <td style="padding: 8px 10px; font-weight: bold; border-right: 1px solid #e9e9e9;">grande</td>
+                    <td style="padding: 8px 10px; font-weight: bold; color: #7D6608; border-right: 1px solid #e9e9e9; font-family: monospace;">mayor (mayores)</td>
+                    <td style="padding: 8px 10px; vertical-align: top;">
+                      • Mi hermano es <strong>mayor</strong> que yo. <small style="color: #777;">(age/rank)</small><br>
+                      • <em>Note: Use "más grande" for physical size.</em>
+                    </td>
+                  </tr>
+                  <tr style="background-color: #FDFBF7; border-bottom: 1px solid #e9e9e9;">
+                    <td style="padding: 8px 10px; font-weight: bold; border-right: 1px solid #e9e9e9;">pequeño/a</td>
+                    <td style="padding: 8px 10px; font-weight: bold; color: #7D6608; border-right: 1px solid #e9e9e9; font-family: monospace;">menor (menores)</td>
+                    <td style="padding: 8px 10px; vertical-align: top;">
+                      • Soy un año <strong>menor</strong> que mi primo. <small style="color: #777;">(age/rank)</small><br>
+                      • <em>Note: Use "más pequeño" for physical size.</em>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pitfalls Warnings -->
+            <div style="font-size: 0.75rem; line-height: 1.45; padding: 12px; background: rgba(0, 0, 0, 0.02); border-radius: var(--radius-sm); border: 1px solid var(--clr-border);">
+              <span style="font-weight: 700; color: var(--clr-primary); display: block; margin-bottom: 3px;">⚠️ Common Pitfalls:</span>
+              • Do not use <strong>como</strong> for inequality (e.g., <em>*más... como</em> is incorrect; use <em>que</em>).<br>
+              • Do not use <strong>que</strong> for equality with <em>tan/tanto</em> (e.g., <em>*tan... que</em> is incorrect; use <em>como</em>).<br>
+              • Remember: <strong>igual de</strong> is followed by the connector <strong>que</strong>, not <em>como</em>.<br>
+              • Ensure <strong>tanto/a/os/as</strong> agrees in gender and number with the noun it accompanies.
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Practice Cards -->
+          <div class="glass-card compare-exercise-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px;">
+            <!-- Tabs Toggle -->
+            <div class="compare-mode-selector" style="display: flex; gap: 10px; border-bottom: 1px solid var(--clr-border); padding-bottom: 14px; margin-bottom: 4px;">
+              <button class="compare-tab active" id="tab-compare-challenge" data-mode="challenge" style="flex: 1; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--clr-border); background-color: var(--clr-bg); font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition-fast);">🎯 Challenge Mode</button>
+              <button class="compare-tab" id="tab-compare-builder" data-mode="builder" style="flex: 1; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--clr-border); background-color: var(--clr-bg); font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition-fast);">✍️ Sentence Builder</button>
+            </div>
+
+            <!-- CONTAINER A: CHALLENGE MODE -->
+            <div id="compare-challenge-container" style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--clr-border); padding-bottom: 12px; margin-bottom: 4px;">
+                <h3 class="section-title" style="margin: 0; font-size: 1.15rem;">Fill-in-the-Blank Challenge</h3>
+                <span id="compare-drill-score" style="font-size: 0.85rem; font-weight: 600; color: var(--clr-primary); background: rgba(211,84,0,0.08); padding: 4px 10px; border-radius: 12px;">Score: 0 / 0</span>
+              </div>
+
+              <div id="compare-drill-setup" style="text-align: center; padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: center;">
+                <span style="font-size: 2.5rem;">🎯</span>
+                <h4>Test Your Mastery</h4>
+                <p style="font-size: 0.9rem; color: var(--clr-text-light); line-height: 1.5; margin: 0 0 12px 0; max-width: 80%;">
+                  Practice fill-in-the-blank sentences comparing properties, items, and locations. Pronunciation and feedback is provided immediately!
+                </p>
+                <button class="btn btn-primary" id="btn-start-compare">Start Drill</button>
+              </div>
+
+              <div id="compare-drill-arena" style="display: none; flex-direction: column; gap: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--clr-text-light);">
+                  <span id="compare-drill-index">Question 1 of 10</span>
+                  <span>Tap the correct Spanish option below</span>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.02); border: 1px solid var(--clr-border); padding: 24px; border-radius: var(--radius-md); text-align: center;">
+                  <p id="compare-sentence-es" style="font-size: 1.45rem; font-weight: 700; color: var(--clr-text-dark); line-height: 1.4; margin: 0;"></p>
+                  <p id="compare-sentence-en" style="font-size: 0.95rem; font-style: italic; color: var(--clr-text-light); margin: 8px 0 0 0;"></p>
+                </div>
+
+                <div id="compare-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                  <!-- Options filled dynamically -->
+                </div>
+
+                <div id="compare-feedback-box" style="display: none; background: rgba(0, 0, 0, 0.02); padding: 16px; border-radius: var(--radius-md); border-left: 4px solid var(--clr-primary); animation: fadeIn 0.3s ease;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span id="compare-feedback-title" style="font-weight: 700; font-size: 0.95rem;">Correct!</span>
+                    <button class="card-audio-btn" id="btn-speak-compare" title="Listen sentence" style="padding: 6px;">
+                      <svg viewBox="0 0 24 24" style="width:16px; height:16px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                  </div>
+                  <p id="compare-feedback-explanation" style="font-size: 0.85rem; color: var(--clr-text-dark); margin: 0; line-height: 1.45;"></p>
+                </div>
+
+                <button class="btn btn-primary" id="btn-next-compare" style="width: 100%; display: none;">Next Question ➔</button>
+              </div>
+
+              <!-- Compare Summary Screen -->
+              <div id="compare-drill-summary" style="display: none; flex-direction: column; align-items: center; text-align: center; gap: 18px; padding: 24px;">
+                <span style="font-size: 3rem;">🏆</span>
+                <h4 style="font-size: 1.4rem; font-weight: 700; color: var(--clr-primary); margin: 0;">Drill Completed!</h4>
+                <p id="compare-summary-text" style="font-size: 1rem; color: var(--clr-text-dark); margin: 0;">You got 8 out of 10 questions correct!</p>
+                <div id="compare-summary-percentage" style="font-size: 2.5rem; font-weight: 800; color: var(--clr-success); margin: 6px 0;">80%</div>
+                <button class="btn btn-primary" id="btn-restart-compare">Try Again</button>
+              </div>
+            </div>
+
+            <!-- CONTAINER B: SENTENCE BUILDER -->
+            <div id="compare-builder-container" style="display: none; flex-direction: column; gap: 16px;">
+              <div style="border-bottom: 1px solid var(--clr-border); padding-bottom: 12px; margin-bottom: 4px;">
+                <h3 class="section-title" style="margin: 0; font-size: 1.15rem;">Interactive Sentence Builder</h3>
+              </div>
+
+              <!-- Category Dropdown Selector -->
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="compare-builder-select" style="font-size: 0.85rem; font-weight: 600; color: var(--clr-text-dark);">Choose Comparison Structure:</label>
+                <select id="compare-builder-select" class="select-filter" style="width: 100%; box-shadow: none;">
+                  <!-- Dynamically populated by app.js -->
+                </select>
+              </div>
+
+              <!-- Prompt Box -->
+              <div style="background: rgba(var(--clr-primary-rgb), 0.03); border: 1px solid var(--clr-border); padding: 16px; border-radius: var(--radius-md); border-left: 4px solid var(--clr-primary); display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span id="compare-builder-formula" style="font-size: 0.88rem; font-weight: 700; color: var(--clr-primary); font-family: monospace;">Formula: más + [adjetivo] + que</span>
+                </div>
+                <p id="compare-builder-prompt" style="font-size: 0.85rem; color: var(--clr-text-dark); margin: 0; line-height: 1.45;"></p>
+              </div>
+
+              <!-- Input text box -->
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="compare-builder-input" style="font-size: 0.85rem; font-weight: 600; color: var(--clr-text-dark);">Write your Spanish sentence here:</label>
+                <textarea id="compare-builder-input" class="input-textarea" style="height: 80px; min-height: 80px; font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.45;" placeholder="Type your sentence..."></textarea>
+              </div>
+
+              <!-- Builder Feedback box -->
+              <div id="compare-builder-feedback" style="display: none; padding: 14px; border-radius: var(--radius-md); font-size: 0.88rem; line-height: 1.45; animation: fadeIn 0.3s ease;">
+                <!-- Result status will be populated dynamically -->
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-top: 4px;">
+                <button class="btn btn-primary" id="btn-check-builder" style="flex: 2;">Verify Sentence Structure</button>
+                <button class="btn btn-outline" id="btn-reset-builder" style="flex: 1;">Clear</button>
+              </div>
+
+              <!-- Model Sentence Box -->
+              <div id="compare-builder-model-box" style="display: none; background: rgba(0, 0, 0, 0.02); border: 1px solid var(--clr-border); padding: 16px; border-radius: var(--radius-md); animation: fadeIn 0.3s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 0.72rem; font-weight: 700; color: var(--clr-success); text-transform: uppercase; letter-spacing: 0.05em;">Model Answer Example:</span>
+                  <button class="card-audio-btn" id="btn-speak-builder-model" title="Listen sentence" style="padding: 6px;">
+                    <svg viewBox="0 0 24 24" style="width:14px; height:14px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                  </button>
+                </div>
+                <p id="compare-builder-model-es" style="font-size: 1.05rem; font-weight: 700; color: var(--clr-text-dark); margin: 0;"></p>
+                <p id="compare-builder-model-en" style="font-size: 0.85rem; font-style: italic; color: var(--clr-text-light); margin: 4px 0 0 0;"></p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Include data source first, then core app controller -->
+  <script src="data.js?v=1.0.2"></script>
+  <script src="app.js?v=1.0.2"></script>
+</body>
+</html>
