@@ -332,14 +332,17 @@ function speakText(text, lang = 'es') {
   const encodeText = encodeURIComponent(cleanText);
   const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodeText}`;
   
-  const audio = new Audio(googleTtsUrl);
-  audio.playbackRate = state.voiceRate;
-  audio.play()
+  currentAudioUrl = googleTtsUrl;
+  currentAudio = new Audio(googleTtsUrl);
+  currentAudio.playbackRate = state.voiceRate;
+  currentAudio.play()
     .then(() => {
       console.log(`Played high-quality Google TTS audio (${lang})`);
     })
     .catch((err) => {
       console.warn("Google TTS failed. Falling back to local SpeechSynthesis...", err);
+      currentAudio = null;
+      currentAudioUrl = null;
       playSpeechSynthesisFallback(cleanText, lang);
     });
 }

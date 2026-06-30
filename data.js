@@ -432,6 +432,50 @@ const INITIAL_LISTENING = [
     answer: 'Está en el centro y tiene una cocina grande y moderna.',
     answerTranslation: 'It is in the center and has a large and modern kitchen.',
     context: 'Moving & Housing Advantages'
+  },
+  {
+    id: 'l_4_3',
+    unit: 4,
+    passage: 'Perdone, señora, ¿le importaría hablar un poco más despacio? Es que mi nivel de español es básico y me cuesta comprender cuando habla muy rápido.',
+    passageTranslation: 'Excuse me, ma\'am, would you mind speaking a bit slower? My Spanish level is basic and it is hard for me to understand when you speak very fast.',
+    question: '¿Qué le pide el estudiante a la señora?',
+    questionTranslation: 'What does the student ask the woman to do?',
+    answer: 'Le pide que hable más despacio.',
+    answerTranslation: 'He asks her to speak slower.',
+    context: 'Courtesy Requests (Usted)'
+  },
+  {
+    id: 'l_4_4',
+    unit: 4,
+    passage: 'Disculpe, señor, ¿me podría decir si esta línea va directamente al centro de la ciudad o tengo que hacer transbordo?',
+    passageTranslation: 'Excuse me, sir, could you tell me if this line goes directly to the city center or do I have to transfer?',
+    question: '¿Qué información quiere saber el pasajero?',
+    questionTranslation: 'What information does the passenger want to know?',
+    answer: 'Si la línea va directo al centro o si tiene que hacer transbordo.',
+    answerTranslation: 'If the line goes directly to the center or if he has to transfer.',
+    context: 'Polite Inquiries (Usted)'
+  },
+  {
+    id: 'l_4_5',
+    unit: 4,
+    passage: 'Hola, Juan. ¿Te importaría cerrar la ventana? Tengo un poco de frío y el viento molesta bastante.',
+    passageTranslation: 'Hi, Juan. Would you mind closing the window? I am a bit cold and the wind is quite annoying.',
+    question: '¿Qué favor le pide el hablante a Juan?',
+    questionTranslation: 'What favor does the speaker ask Juan?',
+    answer: 'Le pide que cierre la ventana.',
+    answerTranslation: 'He asks him to close the window.',
+    context: 'Polite Requests (Tú)'
+  },
+  {
+    id: 'l_4_6',
+    unit: 4,
+    passage: 'Buenos días. ¿Le importaría abrir la ventana? Es que hace mucho calor aquí adentro y no hay aire acondicionado.',
+    passageTranslation: 'Good morning. Would you mind opening the window? It is very hot in here and there is no air conditioning.',
+    question: '¿Qué cambio quiere hacer la persona en la sala?',
+    questionTranslation: 'What change does the person want to make in the room?',
+    answer: 'Quiere abrir la ventana para refrescar la habitación.',
+    answerTranslation: 'They want to open the window to cool down the room.',
+    context: 'Courtesy Requests (Usted)'
   }
 ];
 
